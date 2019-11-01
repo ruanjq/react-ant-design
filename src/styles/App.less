@@ -1,0 +1,116 @@
+
+@import '~antd/dist/antd.css';
+@import "./normalize.css";
+@import "./variable";
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%; overflow-y: hidden;
+}
+
+.fl{
+    float: left!important;
+}
+.fr{ float: right!important;}
+.clearfix{
+    display: block;
+    &::after{
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+        font-size: 0;
+    }
+}
+
+#adminstock-app{
+    height: 100%;
+    display: flex;
+    min-width: 1200px; overflow-x: auto;
+    .left{
+        height: 100VH; background: #000c17; 
+    }
+    .right{
+        flex: 1;  height: 100VH; width: 100%; position: relative;overflow-y: hidden;
+    }
+}
+
+
+
+.sider-bar-wrapper{
+    position: relative;  z-index: 2; height: 100vh;
+    &.sider-bar-open{width: @siderBarWidth;}
+    &.sider-bar-collapsed{width: @siderBarMinWidth;}
+    .ant-menu-inline{width: @siderBarWidth;}
+    .collapsed-sidebar{
+        position: absolute; right: -76px;
+        z-index: 2;
+        top: 14px;
+    }
+
+    
+    .logo{
+        height: @pageHeadHeight; text-align: center; line-height: @pageHeadHeight;
+        background: #00274E;font-size: 26px; font-weight: bolder; cursor: pointer;
+        a{ color: #FFF; background: inherit}
+        i{transition: all 0.2s;}
+        span{ display: inline-block; margin-left: 10px;transition: all 0.2s; 
+            opacity: 1;
+            &.hidden{
+                width: 0; font-size: 12px;  opacity: 0; margin-left: 0; position: absolute;
+            }
+        }
+    }
+    .menu-box{
+        position: absolute; top: @pageHeadHeight; bottom: 0;
+        overflow: auto;
+        overflow-x: hidden;
+        left: 0; right: 0;
+        &::-webkit-scrollbar-track{
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        &::-webkit-scrollbar {
+            width: 3px;
+            background-color: #F5F5F5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #000000;
+            border: 2px solid #555555;
+        }
+    }
+}
+
+.nav-bar-wrapper{
+    height: @pageHeadHeight;padding-left: 110px;
+    padding-right: 30px;
+    line-height: @pageHeadHeight;
+    border-radius: 0!important;border-bottom: 1px solid #e6e6e6;
+    .text{
+        color: #333;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 1;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    .site-menu{
+        display: inline-block; vertical-align: middle;
+    }
+}
+
+.panel-wrapper{
+    position: absolute; top: @pageHeadHeight; bottom: 70px; left: 0; right: 0;
+    background: #f0f2f5; padding: 30px;
+}
+
+.footer-wrapper{
+    position: absolute; left: 0; right: 0; 
+    bottom: 0; height: @pageFooterHeight;
+}
