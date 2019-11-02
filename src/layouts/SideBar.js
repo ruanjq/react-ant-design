@@ -2,19 +2,52 @@ import React from "react";
 
 import { Menu, Icon, Button } from 'antd';
 
+import tools from "../modules/tools";
+
 const { SubMenu } = Menu;
 
  
+const MIN_BODY_WIDTH = 1366;
 
 class SiderBar extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
+        }
     }
 
-    state = {
-        collapsed: false,
-    }
     
+    
+    componentDidMount(){
+        this.toggleEventListener();
+    }
+
+    toggleEventListener(){
+        let _self = this;
+        window.addEventListener("resize",tools.throllte(function(e){
+            console.log(document.body.clientWidth <= MIN_BODY_WIDTH);
+            if(document.body.clientWidth <= MIN_BODY_WIDTH){
+                _self.closeCollapsed();
+            } else {
+                _self.openCollapsed();
+            }
+        },300));
+    }
+
+    openCollapsed() {
+        this.setState({
+            collapsed: false,
+        });
+        
+    }
+
+    closeCollapsed = () =>{
+        this.setState({
+            collapsed: true,
+        });
+    }
+
     toggleCollapsed = () => {
         this.setState({
             collapsed: !this.state.collapsed,
@@ -24,7 +57,7 @@ class SiderBar extends React.Component{
 
     render(){
         return (
-            <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-collapsed"}`} >
+            <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-close"}`} >
                 <Button type="primary" className="collapsed-sidebar" onClick={this.toggleCollapsed}>
                 <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
                 </Button>
@@ -35,7 +68,7 @@ class SiderBar extends React.Component{
                     </a>
                 </div>
                 <div className="menu-box">
-                    <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
+                    <Menu defaultSelectedKeys={['1']}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
                         <Menu.Item key="1">
                             <Icon type="pie-chart" />
                             <span>Option 1</span>

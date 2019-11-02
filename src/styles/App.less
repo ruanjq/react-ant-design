@@ -43,10 +43,10 @@ html,body{
 .sider-bar-wrapper{
     position: relative;  z-index: 2; height: 100vh;
     &.sider-bar-open{width: @siderBarWidth;}
-    &.sider-bar-collapsed{width: @siderBarMinWidth;}
+    &.sider-bar-close{width: @siderBarMinWidth;}
     .ant-menu-inline{width: @siderBarWidth;}
     .collapsed-sidebar{
-        position: absolute; right: -76px;
+        position: absolute; right: -65px;
         z-index: 2;
         top: 14px;
     }
@@ -87,7 +87,7 @@ html,body{
 }
 
 .nav-bar-wrapper{
-    height: @pageHeadHeight;padding-left: 110px;
+    height: @pageHeadHeight;padding-left: 88px;
     padding-right: 30px;
     line-height: @pageHeadHeight;
     border-radius: 0!important;border-bottom: 1px solid #e6e6e6;
@@ -105,9 +105,13 @@ html,body{
     }
 }
 
-.panel-wrapper{
-    position: absolute; top: @pageHeadHeight; bottom: 70px; left: 0; right: 0;
-    background: #f0f2f5; padding: 30px;
+.main-wrapper{
+    position: absolute; 
+    top: @pageHeadHeight; bottom: 70px; left: 0; right: 0;
+    background: #f0f2f5; padding: 15px 20px;
+    .main-body{
+        margin-top: 10px; background: #FFF; padding: 15px;
+    }
 }
 
 .footer-wrapper{
