@@ -1,0 +1,669 @@
+{
+    "status": 200,
+    "data": {
+        "userinfo": {
+            "id": "171",
+            "username": "ruanjiqian",
+            "real_name": "\u962e\u7ee7\u6f5c",
+            "department_id": "0",
+            "is_owner": "0",
+            "powers": null,
+            "action_web": "sys_set",
+            "allow_web": null
+        },
+        "authInfo": [
+            {
+                "name": "\u4ef7\u683c\u8425\u9500\u6a21\u5757",
+                "systemSn": "2",
+                "systemSelect": 0,
+                "domain": "http:\/\/www.price.com.v1029_dl_app.php7.egomsl.com",
+                "menus": [
+                    {
+                        "name": "\u4ef7\u683c\u6a21\u5757",
+                        "children": [
+                            {
+                                "name": "\u5546\u54c1\u4ef7\u683c\u5217\u8868",
+                                "url": "\/goodsPrice\/index"
+                            },
+                            {
+                                "name": " \u4ef7\u683c\u7ec4\u5217\u8868",
+                                "url": "\/priceGroup\/index"
+                            },
+                            {
+                                "name": "\u79d2\u6740\u5217\u8868",
+                                "url": "\/seckill\/list"
+                            },
+                            {
+                                "name": "\u5546\u54c1\u4ef7\u683c\u65e5\u5fd7\u8bb0\u5f55",
+                                "url": "\/goodsPrice\/log"
+                            },
+                            {
+                                "name": "\u5220\u9664\u7ec4\u5217\u8868",
+                                "url": "\/deleteGroup\/index"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u8425\u9500\u6a21\u5757",
+                        "children": [
+                            {
+                                "name": "\u8425\u9500\u6d3b\u52a8\u5217\u8868",
+                                "url": "\/marketingGroup\/index"
+                            },
+                            {
+                                "name": "\u6ee1\u8d60\u6d3b\u52a8\u5217\u8868",
+                                "url": "\/freegift\/index"
+                            },
+                            {
+                                "name": "\u642d\u914d\u8d2d\u6d3b\u52a8\u5217\u8868",
+                                "url": "\/collocationGroup\/index"
+                            },
+                            {
+                                "name": "\u6ee1\u8d60\u6d3b\u52a8\u65e5\u5fd7\u8bb0\u5f55",
+                                "url": "\/freegift\/log"
+                            },
+                            {
+                                "name": "\u5220\u9664\u6d3b\u52a8\u4e0eSKU\u65e5\u5fd7",
+                                "url": "\/marketingGroup\/detailLog"
+                            },
+                            {
+                                "name": "\u8425\u9500\u6d3b\u52a8\u65e5\u5fd7\u8bb0\u5f55",
+                                "url": "\/marketingGroup\/logRecord"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u81ea\u52a8\u8c03\u4ef7\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u81ea\u52a8\u8c03\u4ef7\u914d\u7f6e\u7ba1\u7406",
+                                "url": "\/adjustPrice\/index"
+                            },
+                            {
+                                "name": "\u8c03\u4ef7\u6267\u884c\u7ed3\u679c\u65e5\u5fd7",
+                                "url": "\/adjustPrice\/log"
+                            },
+                            {
+                                "name": "\u672c\u5e97\u552e\u4ef7\u63a5\u6536\u65e5\u5fd7",
+                                "url": "\/shopPriceReceive\/index"
+                            },
+                            {
+                                "name": "\u65b0\u54c1\u63a5\u6536\u65e5\u5fd7",
+                                "url": "\/priceNewGoods\/index"
+                            }
+                        ]
+                    }
+                ],
+                "auths": {
+                    "\/goodsPrice\/index": [
+                        "batchUpdateSaleTips",
+                        "searchInvalidSkuPrice",
+                        "add",
+                        "batchEditPromotion"
+                    ],
+                    "\/priceGroup\/index": [
+                        "searchInvalidSkuPrice",
+                        "copyPriceQueue",
+                        "runQueue",
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/seckill\/list": [
+                        "searchInvalidSkuPrice",
+                        "copyPriceQueue",
+                        "runQueue",
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/goodsPrice\/log": [],
+                    "\/deleteGroup\/index": [
+                        "goodsPriceLog",
+                        "batchDeleteSalePrice",
+                        "runQueue",
+                        "del",
+                        "edit"
+                    ],
+                    "\/goodsPrice\/invalidSKU": [
+                        "deleteSku",
+                        "searchInvalidSkuPrice"
+                    ],
+                    "\/priceGroup\/goodsList": [
+                        "searchInvalidSkuPrice",
+                        "add"
+                    ],
+                    "\/goodsPrice\/delete": [
+                        "deleteSku"
+                    ],
+                    "\/priceGroup\/add": [
+                        "saveQueue"
+                    ],
+                    "\/seckill\/goods": [],
+                    "\/marketingGroup\/index": [
+                        "marketDataList",
+                        "runQueue",
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/freegift\/index": [
+                        "skulist",
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/collocationGroup\/index": [
+                        "edit",
+                        "add",
+                        "pause",
+                        "list",
+                        "publish"
+                    ],
+                    "\/collocationGroup\/skuList": [],
+                    "\/freegift\/log": [],
+                    "\/marketingGroup\/detailLog": [],
+                    "\/freegift\/goodsList": [
+                        "deleteSku"
+                    ],
+                    "\/market-man-zeng\/del-sku": [],
+                    "\/freegift\/allList": [
+                        "deleteSku"
+                    ],
+                    "\/marketingGroup\/logRecord": [],
+                    "\/marketingGroup\/invalidMarketingSKU": [
+                        "deleteSku"
+                    ],
+                    "\/marketingGroup\/marketingGroupGoodsList": [
+                        "deleteSku"
+                    ],
+                    "\/adjustPrice\/index": [
+                        "crondSwitch",
+                        "flowSwitch",
+                        "runQueue",
+                        "edit"
+                    ],
+                    "\/adjustPrice\/log": [],
+                    "\/adjustPrice\/failSKU": [
+                        "resetRunQueue"
+                    ],
+                    "\/shopPriceReceive\/index": [],
+                    "\/priceNewGoods\/index": []
+                },
+                "pipeline": [
+                    "1",
+                    "2",
+                    "3",
+                    "5",
+                    "6",
+                    "7",
+                    "10",
+                    "11",
+                    "33",
+                    "34",
+                    "35",
+                    "36",
+                    "37",
+                    "38",
+                    "39",
+                    "40",
+                    "41",
+                    "42",
+                    "43",
+                    "44",
+                    "45",
+                    "46",
+                    "47",
+                    "48",
+                    "49",
+                    "50",
+                    "51",
+                    "52",
+                    "53",
+                    "54",
+                    "55",
+                    "56",
+                    "57",
+                    "58"
+                ]
+            },
+            {
+                "name": "\u57fa\u7840\u670d\u52a1\u6a21\u5757",
+                "systemSn": "1",
+                "systemSelect": 1,
+                "domain": "http:\/\/www.base.com.v1024_hotfix.php7.egomsl.com",
+                "menus": [
+                    {
+                        "name": "\u56fd\u5bb6\u7ad9\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u56fd\u5bb6\u7ad9\u5217\u8868",
+                                "url": "\/pipeline\/index"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u5546\u54c1\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u672c\u5e97\u552e\u4ef7\u53c2\u6570\u603b\u8868",
+                                "url": "\/goodscategory\/moreList"
+                            },
+                            {
+                                "name": "\u672c\u5e97\u552e\u4ef7\u53c2\u6570\u7ba1\u7406",
+                                "url": "\/goodscategory\/index"
+                            },
+                            {
+                                "name": "\u672c\u5e97\u552e\u4ef7\u5217\u8868",
+                                "url": "\/goodsShop\/list"
+                            },
+                            {
+                                "name": "\u72b6\u6001\u53d8\u66f4\u63a5\u6536\u5217\u8868",
+                                "url": "\/goodsShop\/receiveList"
+                            },
+                            {
+                                "name": "\u672c\u5e97\u552e\u4ef7\u8ba1\u7b97\u65e5\u5fd7",
+                                "url": "\/goodsShop\/calculateList"
+                            },
+                            {
+                                "name": "\u5206\u7c7b\u5217\u8868",
+                                "url": "\/baseCategory\/index"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u5546\u54c1\u6807\u7b7e\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u5546\u54c1\u6807\u7b7e\u5217\u8868",
+                                "url": "\/goodsLabel\/index"
+                            },
+                            {
+                                "name": "\u4e2d\u5fc3\u8bcd\u89c4\u5219\u961f\u5217",
+                                "url": "\/goodsLabel\/ruleList"
+                            },
+                            {
+                                "name": "Package\u503c\u5217\u8868",
+                                "url": "\/goodsLabel\/packageList"
+                            },
+                            {
+                                "name": "\u4e2d\u5fc3\u8bcd\u5217\u8868",
+                                "url": "\/goodsLabel\/centerWordList"
+                            },
+                            {
+                                "name": "\u865a\u62df\u5206\u7c7b\u8bcd\u9608\u503c",
+                                "url": "\/goodsLabel\/vcThresholdList"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u7269\u6d41\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u5730\u533a\u5217\u8868",
+                                "url": "\/logistics\/area"
+                            },
+                            {
+                                "name": "\u5730\u533a\u914d\u9001\u65b9\u5f0f\u914d\u7f6e",
+                                "url": "\/logistics\/deliveryMethod"
+                            },
+                            {
+                                "name": "\u5730\u533a\u6536\u8d39\u533a\u95f4\u7ba1\u7406",
+                                "url": "\/logistics\/tollInterval"
+                            },
+                            {
+                                "name": "\u5730\u533a\u8fd0\u8d39\u7ba1\u7406",
+                                "url": "\/logistics\/cost"
+                            },
+                            {
+                                "name": "\u7269\u6d41\u63d0\u793a\u8bed",
+                                "url": "\/logistics\/logisticsTip"
+                            },
+                            {
+                                "name": "\u7269\u6d41\u64cd\u4f5c\u65e5\u5fd7",
+                                "url": "\/logistics\/logisticsLog"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u7528\u6237\u9632\u5237\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u7528\u6237\u9632\u5237\u5217\u8868",
+                                "url": "\/fangshua\/index"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "\u5e93\u5b58\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u5b9e\u65f6\u5e93\u5b58\u67e5\u8be2",
+                                "url": "\/stock\/index"
+                            },
+                            {
+                                "name": "\u5e93\u5b58\u914d\u7f6e\u89c4\u5219\u5217\u8868",
+                                "url": "\/stock\/ruleList"
+                            },
+                            {
+                                "name": "\u5e93\u5b58\u914d\u7f6e\u751f\u6548\u5217\u8868",
+                                "url": "\/stock\/validList"
+                            },
+                            {
+                                "name": "\u5546\u54c1\u5e93\u5b58\u5217\u8868",
+                                "url": "\/stock\/stockList"
+                            },
+                            {
+                                "name": "\u865a\u5e93\u767d\u540d\u5355\u5217\u8868",
+                                "url": "\/stockwhite\/index"
+                            }
+                        ]
+                    }
+                ],
+                "auths": {
+                    "\/pipeline\/index": [
+                        "languageCode",
+                        "pcDomain",
+                        "mDomain",
+                        "appCountryCode",
+                        "releaseSite",
+                        "copyData",
+                        "edit",
+                        "add",
+                        "copyQueue",
+                        "pcmCountryCode",
+                        "secondLanguageCode"
+                    ],
+                    "\/goodscategory\/moreList": [],
+                    "\/goodscategory\/index": [
+                        "refresh",
+                        "edit",
+                        "log",
+                        "updateQueue"
+                    ],
+                    "\/goodsShop\/list": [],
+                    "\/goodsShop\/receiveList": [],
+                    "\/goodsShop\/calculateList": [],
+                    "\/goodsShop\/calculateLogList": [],
+                    "\/baseCategory\/index": [
+                        "editSeoCategory",
+                        "importCategory",
+                        "exportCategory",
+                        "delete",
+                        "log",
+                        "edit",
+                        "add"
+                    ],
+                    "\/baseCategory\/log": [],
+                    "\/baseCategory\/add": [],
+                    "\/topGoods\/topArgumentList": [],
+                    "\/goodsLabel\/index": [],
+                    "\/goodsLabel\/ruleList": [
+                        "copy",
+                        "runRule",
+                        "edit"
+                    ],
+                    "\/goodsLabel\/packageList": [
+                        "edit"
+                    ],
+                    "\/goodsLabel\/centerWordList": [],
+                    "\/goodsLabel\/vcThresholdList": [
+                        "edit"
+                    ],
+                    "\/logistics\/area": [
+                        "edit"
+                    ],
+                    "\/logistics\/deliveryMethod": [
+                        "edit"
+                    ],
+                    "\/logistics\/tollInterval": [
+                        "edit"
+                    ],
+                    "\/logistics\/cost": [
+                        "edit"
+                    ],
+                    "\/logistics\/logisticsTip": [
+                        "delete",
+                        "edit",
+                        "add"
+                    ],
+                    "\/logistics\/logisticsLog": [],
+                    "\/fangshua\/index": [
+                        "delete",
+                        "log",
+                        "add",
+                        "edit"
+                    ],
+                    "\/stock\/index": [
+                        "exportData"
+                    ],
+                    "\/stock\/ruleList": [
+                        "copy",
+                        "runRule",
+                        "edit",
+                        "add"
+                    ],
+                    "\/stock\/validList": [],
+                    "\/stock\/stockList": [],
+                    "\/stock\/addRule": [],
+                    "\/stockwhite\/index": [
+                        "log",
+                        "add",
+                        "delete"
+                    ]
+                },
+                "pipeline": [
+                    "1",
+                    "2",
+                    "3",
+                    "5",
+                    "6",
+                    "7",
+                    "10",
+                    "11",
+                    "33",
+                    "34",
+                    "35",
+                    "36",
+                    "37",
+                    "38",
+                    "39",
+                    "40",
+                    "41",
+                    "42",
+                    "43",
+                    "44",
+                    "45",
+                    "46",
+                    "47",
+                    "48",
+                    "49",
+                    "50",
+                    "51",
+                    "52",
+                    "53",
+                    "54",
+                    "55",
+                    "56",
+                    "57",
+                    "58"
+                ]
+            },
+            {
+                "name": "\u6743\u9650\u6a21\u5757",
+                "systemSn": "3",
+                "systemSelect": 0,
+                "domain": "http:\/\/www.auth.com.master.php7.egomsl.com",
+                "menus": [
+                    {
+                        "name": "\u6743\u9650\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u90e8\u95e8\u5217\u8868",
+                                "url": "\/auth\/department"
+                            },
+                            {
+                                "name": "\u89d2\u8272\u5217\u8868",
+                                "url": "\/auth\/player"
+                            },
+                            {
+                                "name": "\u7528\u6237\u5217\u8868",
+                                "url": "\/auth\/user"
+                            },
+                            {
+                                "name": "\u83dc\u5355\u5217\u8868",
+                                "url": "\/auth\/menu"
+                            },
+                            {
+                                "name": "\u5143\u7d20\u5217\u8868",
+                                "url": "\/auth\/element"
+                            }
+                        ]
+                    }
+                ],
+                "auths": {
+                    "\/auth\/department": [
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/auth\/player": [
+                        "editAuth",
+                        "del",
+                        "edit",
+                        "add",
+                        "viewAuth"
+                    ],
+                    "\/auth\/user": [
+                        "userAssign",
+                        "setRole",
+                        "del",
+                        "editAuth",
+                        "viewAuth"
+                    ],
+                    "\/auth\/menu": [
+                        "setElement",
+                        "del",
+                        "edit",
+                        "add"
+                    ],
+                    "\/auth\/element": [
+                        "del",
+                        "edit"
+                    ]
+                },
+                "pipeline": [
+                    "1",
+                    "2",
+                    "3",
+                    "5",
+                    "6",
+                    "7",
+                    "10",
+                    "11",
+                    "33",
+                    "34",
+                    "35",
+                    "36",
+                    "37",
+                    "38",
+                    "39",
+                    "40",
+                    "41",
+                    "42",
+                    "43",
+                    "44",
+                    "45",
+                    "46",
+                    "47",
+                    "48",
+                    "49",
+                    "50",
+                    "51",
+                    "52",
+                    "53",
+                    "54",
+                    "55",
+                    "56",
+                    "57",
+                    "58"
+                ]
+            },
+            {
+                "name": "\u4f1a\u5458\u4f53\u7cfb\u6a21\u5757",
+                "systemSn": "4",
+                "systemSelect": 0,
+                "domain": "http:\/\/www.rewards.com.v0904-opt.php7.egomsl.com",
+                "menus": [
+                    {
+                        "name": "\u79ef\u5206\u7ba1\u7406",
+                        "children": [
+                            {
+                                "name": "\u5151\u6362\u5b9e\u7269\u5546\u54c1",
+                                "url": "\/goods\/goodsList"
+                            },
+                            {
+                                "name": "\u5151\u6362\u865a\u62df\u5546\u54c1",
+                                "url": "\/virtual\/virtualList"
+                            }
+                        ]
+                    }
+                ],
+                "auths": {
+                    "\/goods\/goodsList": [
+                        "add"
+                    ],
+                    "\/virtual\/virtualList": [
+                        "batchSetSort",
+                        "batchSetTimeSection",
+                        "batchValid",
+                        "batchInvalid",
+                        "batchDelete",
+                        "detail",
+                        "delete",
+                        "edit",
+                        "add"
+                    ]
+                },
+                "pipeline": [
+                    "1",
+                    "2",
+                    "3",
+                    "5",
+                    "6",
+                    "7",
+                    "10",
+                    "11",
+                    "33",
+                    "34",
+                    "35",
+                    "36",
+                    "37",
+                    "38",
+                    "39",
+                    "40",
+                    "41",
+                    "42",
+                    "43",
+                    "44",
+                    "45",
+                    "46",
+                    "47",
+                    "48",
+                    "49",
+                    "50",
+                    "51",
+                    "52",
+                    "53",
+                    "54",
+                    "55",
+                    "56",
+                    "57",
+                    "58"
+                ]
+            }
+        ]
+    },
+    "msg": null,
+    "serialCode": ""
+}
