@@ -12,7 +12,7 @@ const menu = (
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href='#' onClick={e => e.preventDefault()}><Icon type="poweroff" /> 退出登录</a>
+            <span  onClick={e => e.preventDefault()}><Icon type="poweroff" /> 退出登录</span>
         </Menu.Item>
     </Menu>
   );
@@ -24,9 +24,7 @@ class NavBar extends React.Component{
         current: 'mail',
     }
 
-    constructor(props){
-        super(props);
-    }
+  
 
     handleChange = e => {
         console.log('click ', e);
@@ -48,9 +46,9 @@ class NavBar extends React.Component{
                 </div>
                 <div className="fr">
                     <Dropdown overlay={menu} placement="bottomRight">
-                        <a className="ant-dropdown-link" href='#' onClick={e => e.preventDefault()}>
+                        <span className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         环球xxx &nbsp;<Icon type="down" />
-                        </a>
+                        </span>
                     </Dropdown>
                 </div>
             </div>

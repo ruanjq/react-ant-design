@@ -7,7 +7,8 @@ const {
     override,
     fixBabelImports,
     addLessLoader,
-    addWebpackResolve
+    addWebpackResolve,
+    addWebpackAlias
 } = require('customize-cra');
 
 
@@ -31,5 +32,8 @@ module.exports = override(
     (config, env) => {
         config = rewireReactHotLoader(config, env);
         return config;
-    }
+    },
+    addWebpackAlias({        
+        ["react-dom"]: "@hot-loader/react-dom"
+    })
 );

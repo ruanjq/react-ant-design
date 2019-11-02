@@ -27,9 +27,10 @@ let tools = {
             },delay);
         }
     },
-    queryString(){
-        var pattern = new RegExp('[\?&]' + name + '=([^&]+)', 'g');
-        str = str || location.search;
+    queryString(name,str){
+        /* eslint-disable-next-line */
+        var pattern = new RegExp(`[\?&]${name}=([^&]+)`, 'g');
+        str = str || window.location.search;
         var arr, match = '';
         while ((arr = pattern.exec(str)) !== null) {
             match = arr[1];

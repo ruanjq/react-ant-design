@@ -1,13 +1,13 @@
 import React from "react";
-
+import {connect} from "react-redux"
 import { Menu, Icon, Button } from 'antd';
-
 import tools from "../modules/tools";
-
+import {userInfoAction} from "../redux/actions/app_action";
 const { SubMenu } = Menu;
 
  
 const MIN_BODY_WIDTH = 1366;
+
 
 class SiderBar extends React.Component{
     constructor(props){
@@ -16,17 +16,16 @@ class SiderBar extends React.Component{
             collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
         }
     }
-
     
-    
-    componentDidMount(){
+    UNSAFE_componentWillMount(){
         this.toggleEventListener();
+        this.props.dispatch(userInfoAction);
+
     }
 
     toggleEventListener(){
         let _self = this;
         window.addEventListener("resize",tools.throllte(function(e){
-            console.log(document.body.clientWidth <= MIN_BODY_WIDTH);
             if(document.body.clientWidth <= MIN_BODY_WIDTH){
                 _self.closeCollapsed();
             } else {
@@ -56,6 +55,59 @@ class SiderBar extends React.Component{
     
 
     render(){
+
+        let {authInfo} = this.props.app.userInfo;
+        console.log("菜单组件",authInfo,authInfo instanceof Array);
+        let MenuNode = null;
+        
+        if(authInfo instanceof Array){
+            MenuNode = authInfo.map((pitem,pindex) => {
+                if(pitem.menus.length){
+                    return (
+                        <SubMenu key={pindex}
+                            title={
+                                <span>
+                                    <Icon type="appstore" />
+                                    <span>{pitem.name}</span>
+                                </span>
+                            }
+                        >
+                            {
+                                pitem.menus.map((sub_item,sub_index) => {
+                                    if(sub_item.children.length){
+                                        return (
+                                            <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
+                                                {
+                                                    sub_item.children.map((ss_item,ss_index) => {
+                                                        return (
+                                                            <Menu.Item key={pindex + "" + sub_index + "" +ss_index}>{ss_item.name}</Menu.Item>
+                                                        )
+                                                    })
+                                                }
+                                            </SubMenu>
+                                        )
+                                        
+                                    }else{
+                                        return (<Menu.Item key={pindex + "" + sub_index}>{sub_item.name}</Menu.Item>)
+                                    }
+                                })
+                            }
+                        </SubMenu>
+                    )
+                }else{
+                    return (
+                        <Menu.Item key={pindex}>
+                            <Icon type="inbox" />
+                            <span>{pitem.name}</span>
+                        </Menu.Item>
+                    )
+                }
+                
+            });
+        }
+
+        
+
         return (
             <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-close"}`} >
                 <Button type="primary" className="collapsed-sidebar" onClick={this.toggleCollapsed}>
@@ -68,8 +120,10 @@ class SiderBar extends React.Component{
                     </a>
                 </div>
                 <div className="menu-box">
-                    <Menu defaultSelectedKeys={['1']}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
-                        <Menu.Item key="1">
+                     
+                     <Menu defaultSelectedKeys={['000']}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
+                        {MenuNode}
+                        {/*<Menu.Item key="1">
                             <Icon type="pie-chart" />
                             <span>Option 1</span>
                         </Menu.Item>
@@ -108,9 +162,8 @@ class SiderBar extends React.Component{
                             <Menu.Item key="11">Option 11</Menu.Item>
                             <Menu.Item key="12">Option 12</Menu.Item>
                             </SubMenu>
-                        </SubMenu>
-
-                </Menu>
+                        </SubMenu>*/}
+                    </Menu> 
                 </div>
             </div>
 
@@ -118,4 +171,12 @@ class SiderBar extends React.Component{
     }
 }
 
-export default SiderBar;
+const mapStateToProps = (state,ownProps) => {
+    return {
+        app:state.app
+    }
+}
+
+
+// 通过connect连接组件和redux数据和dispatch方法
+export default connect(mapStateToProps)(SiderBar);
