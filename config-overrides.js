@@ -14,6 +14,11 @@ const {
 
 const rewireReactHotLoader = require('react-app-rewire-hot-loader');
 
+const entrys =  {
+    'main': './src/index.js',
+    'pace':'./src/modules/pace/pace.js'
+  }
+
 module.exports = override(
     fixBabelImports('import', {
         libraryName: 'antd',
@@ -31,6 +36,7 @@ module.exports = override(
     }),
     (config, env) => {
         config = rewireReactHotLoader(config, env);
+        config.entry = entrys;
         return config;
     },
     addWebpackAlias({        
