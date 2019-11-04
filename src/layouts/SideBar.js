@@ -1,8 +1,9 @@
 import React from "react";
-import {connect} from "react-redux"
+import {connect} from "react-redux";
 import { Menu, Icon, Button } from 'antd';
+import {withRouter} from "react-router-dom";
 import tools from "../modules/tools";
-import {userInfoAction} from "../redux/actions/app_action";
+import {appInfoAction} from "../redux/actions/app_action";
 const { SubMenu } = Menu;
 
  
@@ -10,16 +11,17 @@ const MIN_BODY_WIDTH = 1366;
 
 
 class SiderBar extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(props,context){
+        super(props,context);
         this.state = {
             collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
         }
+        
     }
     
     UNSAFE_componentWillMount(){
         this.toggleEventListener();
-        this.props.dispatch(userInfoAction);
+        this.props.dispatch(appInfoAction);
 
     }
 
@@ -41,7 +43,7 @@ class SiderBar extends React.Component{
         
     }
 
-    closeCollapsed = () =>{
+    closeCollapsed = () => {
         this.setState({
             collapsed: true,
         });
@@ -53,13 +55,17 @@ class SiderBar extends React.Component{
         });
     }
     
+    linkTo = (item) =>{
+        console.log(item);
+        console.log(this.props);
+        this.props.history.push(item.key);
+    }
 
     render(){
 
-        let {authInfo} = this.props.app.userInfo;
-        console.log("菜单组件",authInfo,authInfo instanceof Array);
+        let {authInfo} = this.props.app.appInfo;
         let MenuNode = null;
-        
+        let defaultKey = "/goodsPrice/index";
         if(authInfo instanceof Array){
             MenuNode = authInfo.map((pitem,pindex) => {
                 if(pitem.menus.length){
@@ -79,8 +85,11 @@ class SiderBar extends React.Component{
                                             <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
                                                 {
                                                     sub_item.children.map((ss_item,ss_index) => {
+                                                        if(defaultKey === ""){
+                                                            defaultKey = sub_item.url;
+                                                        }
                                                         return (
-                                                            <Menu.Item key={pindex + "" + sub_index + "" +ss_index}>{ss_item.name}</Menu.Item>
+                                                            <Menu.Item key={ss_item.url}>{ss_item.name}</Menu.Item>
                                                         )
                                                     })
                                                 }
@@ -88,15 +97,21 @@ class SiderBar extends React.Component{
                                         )
                                         
                                     }else{
-                                        return (<Menu.Item key={pindex + "" + sub_index}>{sub_item.name}</Menu.Item>)
+                                        if(defaultKey === ""){
+                                            defaultKey = sub_item.url;
+                                        }
+                                        return (<Menu.Item key={sub_item.url}>{sub_item.name}</Menu.Item>)
                                     }
                                 })
                             }
                         </SubMenu>
                     )
                 }else{
+                    if(defaultKey === ""){
+                        defaultKey = pitem.url;
+                    }
                     return (
-                        <Menu.Item key={pindex}>
+                        <Menu.Item key={pitem.url}>
                             <Icon type="inbox" />
                             <span>{pitem.name}</span>
                         </Menu.Item>
@@ -106,6 +121,7 @@ class SiderBar extends React.Component{
             });
         }
 
+        console.log("选中");
         
 
         return (
@@ -121,48 +137,8 @@ class SiderBar extends React.Component{
                 </div>
                 <div className="menu-box">
                      
-                     <Menu defaultSelectedKeys={['000']}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
+                     <Menu defaultSelectedKeys={defaultKey} defaultOpenKeys={['0','00']} onClick={this.linkTo}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
                         {MenuNode}
-                        {/*<Menu.Item key="1">
-                            <Icon type="pie-chart" />
-                            <span>Option 1</span>
-                        </Menu.Item>
-                        <Menu.Item key="2">
-                            <Icon type="desktop" />
-                            <span>Option 2</span>
-                        </Menu.Item>
-                        <Menu.Item key="3">
-                            <Icon type="inbox" />
-                            <span>Option 3</span>
-                        </Menu.Item>
-                        <SubMenu key="sub1" title={
-                            <span>
-                                <Icon type="mail" />
-                                <span>Navigation One</span>
-                            </span>
-                            }
-                            >
-                            <Menu.Item key="5">Option 5</Menu.Item>
-                            <Menu.Item key="6">Option 6</Menu.Item>
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                        </SubMenu>
-                        <SubMenu
-                            key="sub2"
-                            title={
-                            <span>
-                                <Icon type="appstore" />
-                                <span>Navigation Two</span>
-                            </span>
-                            }
-                        >
-                            <Menu.Item key="9">Option 9</Menu.Item>
-                            <Menu.Item key="10">Option 10</Menu.Item>
-                            <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="11">Option 11</Menu.Item>
-                            <Menu.Item key="12">Option 12</Menu.Item>
-                            </SubMenu>
-                        </SubMenu>*/}
                     </Menu> 
                 </div>
             </div>
@@ -179,4 +155,4 @@ const mapStateToProps = (state,ownProps) => {
 
 
 // 通过connect连接组件和redux数据和dispatch方法
-export default connect(mapStateToProps)(SiderBar);
+export default withRouter(connect(mapStateToProps)(SiderBar));

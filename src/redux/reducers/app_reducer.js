@@ -1,11 +1,11 @@
 
 
 
-export const appReducer = (state = {userInfo:{}},action) => {
+export const appReducer = (state = {appInfo:{}},action) => {
     switch (action.type) {
-        case "USER_INFO":
+        case "APP_INFO":
             return {
-                ...state,userInfo:action.payload
+                ...state,appInfo:action.payload
             }
         default:
             return state;

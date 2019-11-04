@@ -15,17 +15,6 @@ import Main from "./layouts/Main";
 
 import store from "./redux/store";
 
-// import {countAddAction} from "./redux/actions/counter_action";
-// import {userInfoAction} from "./redux/actions/app_action";
-
-// store.dispatch(countAddAction);
-// store.dispatch(userInfoAction);
-
-
-// console.log(store);
-
-// console.log(store.getState());
-
 
 class App extends Component {
     

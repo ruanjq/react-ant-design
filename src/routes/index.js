@@ -22,6 +22,18 @@ let routes = [
             loader:()=> import("../views/home/Home"),
             loading:Loading
         })
+    },{
+        path:"/404",
+        name:"notFound",
+        component:Loadable({
+            loader:()=> import("../components/404"),
+            loading:Loading
+        })
+    }, { 
+        path: '*', 
+        name:'404',
+        redirect: '/404',
+        hidden: true
     }
 ]
 

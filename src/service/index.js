@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-
+import store from "../redux/store";
 // create an axios instance
 const service = axios.create({
     baseURL: "", // api的base_url
@@ -14,7 +14,8 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(config => {
     // Do something before request is sent
-    const website = "zaful"
+    console.log("axios",store.getState());
+    let website = "zf";
     if (config.method === 'post') {
         let data = qs.parse(config.data, {
             parameterLimit: Infinity

@@ -1,0 +1,86 @@
+{
+	"status": 200,
+	"data": [{
+		"site": "ZF",
+		"name": "Zaful",
+		"langs": [{
+			"code": "EN",
+			"name": "英语",
+			"url": "https:\/\/www.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "FR",
+			"name": "法语",
+			"url": "https:\/\/fr.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "ES",
+			"name": "西语",
+			"url": "https:\/\/es.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "PT",
+			"name": "葡语",
+			"url": "https:\/\/pt.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}],
+		"client": ["PC", "M", "IOS", "ANDROID"],
+		"clientLanguages": {
+			"PC": ["EN", "FR", "ES", "PT"],
+			"M": ["EN", "FR"]
+		},
+		"font_list": []
+	}, {
+		"site": "RG",
+		"name": "Rosegal",
+		"langs": [{
+			"code": "EN",
+			"name": "英语",
+			"url": "https:\/\/www.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "FR",
+			"name": "法语",
+			"url": "https:\/\/fr.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "ES",
+			"name": "西语",
+			"url": "https:\/\/es.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}, {
+			"code": "PT",
+			"name": "葡语",
+			"url": "https:\/\/pt.zaful.com\/",
+			"m_url": "https:\/\/m.zaful.com\/"
+		}],
+		"client": ["PC", "M", "IOS", "ANDROID"],
+		"clientLanguages": {
+			"PC": ["EN", "FR", "ES", "PT"],
+			"M": ["EN", "FR"]
+		},
+		"font_list": []
+	}, {
+		"site": "DL",
+		"name": "Dresslily",
+		"langs": [{
+			"code": "EN",
+			"name": "英语",
+			"url": "https:\/\/www.dresslily.com\/",
+			"m_url": "https:\/\/www.dresslily.com\/"
+		}, {
+			"code": "FR",
+			"name": "法语",
+			"url": "https:\/\/fr.dresslily.com\/",
+			"m_url": "https:\/\/fr.dresslily.com\/"
+		}],
+		"client": ["PC", "M", "IOS", "ANDROID"],
+		"clientLanguages": {
+			"PC": ["EN", "FR", "ES", "PT"],
+			"M": ["EN", "FR"]
+		},
+		"font_list": []
+	}],
+	"msg": "success",
+	"serialCode": ""
+}
