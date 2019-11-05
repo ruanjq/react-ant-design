@@ -7,14 +7,72 @@ import {appInfoAction} from "../redux/actions/app_action";
 const { SubMenu } = Menu;
 
  
-const MIN_BODY_WIDTH = 1366;
+const MIN_BODY_WIDTH = 100;
+
+
+
+const MenuNode = (props) =>{
+    let authInfo = props.list || [];
+    return (
+        <Menu defaultSelectedKeys={props.defaultKey} openKeys={props.openKeys} onClick={props.hanldClick}  mode="inline" theme="dark" inlineCollapsed={props.collapsed}>
+            {
+            authInfo.map((pitem,pindex) => {
+                if(pitem.menus.length){
+                    return (
+                        <SubMenu key={pindex}
+                            title={
+                                <span>
+                                    <Icon type="appstore" />
+                                    <span>{pitem.name}</span>
+                                </span>
+                            }
+                        >
+                            {
+                            pitem.menus.map((sub_item,sub_index) => {
+                                
+                                if(sub_item.children.length){
+                                    
+                                    return (
+                                        <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
+                                            {
+                                                sub_item.children.map((ss_item,ss_index) => {
+                                                    return (
+                                                        <Menu.Item key={ss_item.url}>{ss_item.name}</Menu.Item>
+                                                    )
+                                                })
+                                            }
+                                        </SubMenu>
+                                    )
+                                    
+                                }else{
+                                    
+                                    return (<Menu.Item key={sub_item.url}>{sub_item.name}</Menu.Item>)
+                                }
+                            })
+                            }
+                        </SubMenu>
+                    )
+                }else{
+                    return (
+                        <Menu.Item key={pitem.url}>
+                            <Icon type="inbox" />
+                            <span>{pitem.name}</span>
+                        </Menu.Item>
+                    )
+                }
+                
+            })
+            }
+        </Menu>
+    )
+}
 
 
 class SiderBar extends React.Component{
     constructor(props,context){
         super(props,context);
         this.state = {
-            collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
+            collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false
         }
         
     }
@@ -24,6 +82,13 @@ class SiderBar extends React.Component{
         this.props.dispatch(appInfoAction);
 
     }
+
+
+    
+
+    // componentDidUpdate(){
+    //      
+    // }
 
     toggleEventListener(){
         let _self = this;
@@ -56,72 +121,27 @@ class SiderBar extends React.Component{
     }
     
     linkTo = (item) =>{
-        console.log(item);
-        console.log(this.props);
         this.props.history.push(item.key);
     }
 
     render(){
-
         let {authInfo} = this.props.app.appInfo;
-        let MenuNode = null;
-        let defaultKey = "/goodsPrice/index";
-        if(authInfo instanceof Array){
-            MenuNode = authInfo.map((pitem,pindex) => {
-                if(pitem.menus.length){
-                    return (
-                        <SubMenu key={pindex}
-                            title={
-                                <span>
-                                    <Icon type="appstore" />
-                                    <span>{pitem.name}</span>
-                                </span>
-                            }
-                        >
-                            {
-                                pitem.menus.map((sub_item,sub_index) => {
-                                    if(sub_item.children.length){
-                                        return (
-                                            <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
-                                                {
-                                                    sub_item.children.map((ss_item,ss_index) => {
-                                                        if(defaultKey === ""){
-                                                            defaultKey = sub_item.url;
-                                                        }
-                                                        return (
-                                                            <Menu.Item key={ss_item.url}>{ss_item.name}</Menu.Item>
-                                                        )
-                                                    })
-                                                }
-                                            </SubMenu>
-                                        )
-                                        
-                                    }else{
-                                        if(defaultKey === ""){
-                                            defaultKey = sub_item.url;
-                                        }
-                                        return (<Menu.Item key={sub_item.url}>{sub_item.name}</Menu.Item>)
-                                    }
-                                })
-                            }
-                        </SubMenu>
-                    )
-                }else{
-                    if(defaultKey === ""){
-                        defaultKey = pitem.url;
-                    }
-                    return (
-                        <Menu.Item key={pitem.url}>
-                            <Icon type="inbox" />
-                            <span>{pitem.name}</span>
-                        </Menu.Item>
-                    )
-                }
-                
-            });
-        }
-
+        let defaultKey = this.props.location.pathname;
+        let openKeys = [];
         
+        if(authInfo instanceof Array){
+            authInfo.forEach((pitem,pindex) => {
+                if(pitem.menus.length){
+                    pitem.menus.forEach((sub_item,sub_index) => {
+                        sub_item.children.forEach((ss_item,ss_index) => {
+                            if(ss_item.url === defaultKey){
+                                openKeys = ['' + pindex, pindex + '' + sub_index]
+                            }
+                        })
+                    })
+                }
+            })
+        }
 
         return (
             <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-close"}`} >
@@ -135,13 +155,9 @@ class SiderBar extends React.Component{
                     </a>
                 </div>
                 <div className="menu-box">
-                     
-                     <Menu defaultSelectedKeys={defaultKey} defaultOpenKeys={this.state.collapsed ? '' : ['0','00']} onClick={this.linkTo}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
-                        {MenuNode}
-                    </Menu> 
+                    <MenuNode list={authInfo} defaultKey={defaultKey} openKeys={openKeys} hanldClick={this.linkTo}></MenuNode>
                 </div>
             </div>
-
         )
     }
 }

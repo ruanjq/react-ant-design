@@ -14,7 +14,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(config => {
     // Do something before request is sent
-    console.log("axios",store.getState());
+    // console.log("axios",store.getState());
     let website = "zf";
     if (config.method === 'post') {
         let data = qs.parse(config.data, {

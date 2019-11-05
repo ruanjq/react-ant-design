@@ -19,7 +19,7 @@ export const appInfoAction = async (dispatch) =>{
         });
         return result;
     })(res);
-    console.log(appData);
+    // console.log(appData);
     dispatch({
         type:"APP_INFO",
         payload:appData
