@@ -5,16 +5,15 @@ import "../styles/404.less";
 class Error404 extends React.Component{
 
     render(){
-        console.log(222);
         let message = "";
         return (
             <div >
                 <div className="wscn-http404">
                     <div className="pic-404">
                         <img className="pic-404__parent" src={img_404} alt="404"/>
-                        <img className="pic-404__child left" src={img_404_cloud} alt="404"/>
-                        <img className="pic-404__child mid" src={img_404_cloud} alt="404"/>
-                        <img className="pic-404__child right" src={img_404_cloud} alt="404"/>
+                        <img className="pic-404__child left-404" src={img_404_cloud} alt="404"/>
+                        <img className="pic-404__child mid-404" src={img_404_cloud} alt="404"/>
+                        <img className="pic-404__child right-404" src={img_404_cloud} alt="404"/>
                     </div>
                     <div className="bullshit">
                         <div className="bullshit__oops">404</div>

@@ -121,7 +121,6 @@ class SiderBar extends React.Component{
             });
         }
 
-        console.log("选中");
         
 
         return (
@@ -137,7 +136,7 @@ class SiderBar extends React.Component{
                 </div>
                 <div className="menu-box">
                      
-                     <Menu defaultSelectedKeys={defaultKey} defaultOpenKeys={['0','00']} onClick={this.linkTo}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
+                     <Menu defaultSelectedKeys={defaultKey} defaultOpenKeys={this.state.collapsed ? '' : ['0','00']} onClick={this.linkTo}  mode="inline" theme="dark" inlineCollapsed={this.state.collapsed}>
                         {MenuNode}
                     </Menu> 
                 </div>

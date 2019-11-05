@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { hot } from 'react-hot-loader';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
 import {Provider} from "react-redux";
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 
-import "./styles/App";
+
 
 import routers from "./routes/index";
-import NavBar from "./layouts/NavBar";
-import SideBar from "./layouts/SideBar";
-import Footer from "./layouts/Footer";
-import Main from "./layouts/Main";
-
 import store from "./redux/store";
 
 
@@ -28,19 +23,11 @@ class App extends Component {
             <Provider store={store}>
                 <ConfigProvider {...yourConfig}>
                     <Router> 
-                        <div className="left">
-                            <SideBar></SideBar>
-                        </div>
-                        <div className="right">
-                            <NavBar></NavBar>
-                            <Main>
-                                <Switch>
-                                    {/* 导入相关路由配置 */}
-                                    {routers.map((r, key) => <Route component={r.component} exact={!!r.exact} key={key} path={r.path} />)}
-                                </Switch>
-                            </Main>
-                            <Footer></Footer>
-                        </div>
+                        <Switch>
+                            {/* 导入相关路由配置 */}
+                            {routers.map((r, key) => <Route component={r.component} exact={!!r.exact} key={key} path={r.path} />)}
+                            <Redirect from='*' to='/404' />
+                        </Switch>
                     </Router>
                 </ConfigProvider>
             </Provider>
