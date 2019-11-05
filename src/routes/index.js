@@ -7,9 +7,8 @@ let Loading = () => <Spin/>
 
 let routes = [
     {
-        path:"/",
-        exact:true,
-        name:"home",
+        path:"/app",
+        name:"app",
         component:Loadable({
             loader:()=> import("../layouts/Main"),
             loading:Loading

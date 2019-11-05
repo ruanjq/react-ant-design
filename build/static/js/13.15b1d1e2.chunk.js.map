@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/stock/WhiteList.js"],"names":["WhiteList","Component"],"mappings":"sNAIqBA,E,iLAEjB,OACE,iF,GAHiCC","file":"static/js/13.15b1d1e2.chunk.js","sourcesContent":["\n\nimport React, { Component } from 'react';\n\nexport default class WhiteList extends Component {\n  render() {\n    return (\n      <div> 虚库白名单列表 </div>\n    );\n  }\n}\n"],"sourceRoot":""}

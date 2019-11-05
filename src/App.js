@@ -26,6 +26,7 @@ class App extends Component {
                         <Switch>
                             {/* 导入相关路由配置 */}
                             {routers.map((r, key) => <Route component={r.component} exact={!!r.exact} key={key} path={r.path} />)}
+                            <Redirect exact from='/' to='/app/index' />
                             <Redirect from='*' to='/404' />
                         </Switch>
                     </Router>

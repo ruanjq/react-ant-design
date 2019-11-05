@@ -13,58 +13,62 @@ const MIN_BODY_WIDTH = 100;
 
 const MenuNode = (props) =>{
     let authInfo = props.list || [];
-    return (
-        <Menu defaultSelectedKeys={props.defaultKey} openKeys={props.openKeys} onClick={props.hanldClick}  mode="inline" theme="dark" inlineCollapsed={props.collapsed}>
-            {
-            authInfo.map((pitem,pindex) => {
-                if(pitem.menus.length){
-                    return (
-                        <SubMenu key={pindex}
-                            title={
-                                <span>
-                                    <Icon type="appstore" />
-                                    <span>{pitem.name}</span>
-                                </span>
-                            }
-                        >
-                            {
-                            pitem.menus.map((sub_item,sub_index) => {
-                                
-                                if(sub_item.children.length){
-                                    
-                                    return (
-                                        <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
-                                            {
-                                                sub_item.children.map((ss_item,ss_index) => {
-                                                    return (
-                                                        <Menu.Item key={ss_item.url}>{ss_item.name}</Menu.Item>
-                                                    )
-                                                })
-                                            }
-                                        </SubMenu>
-                                    )
-                                    
-                                }else{
-                                    
-                                    return (<Menu.Item key={sub_item.url}>{sub_item.name}</Menu.Item>)
+    if(authInfo.length != 0){
+        return (
+            <Menu defaultSelectedKeys={props.defaultKey} onOpenChange={props.onOpenChange} openKeys={props.openKeys} onClick={props.hanldClick}  mode="inline" theme="dark" inlineCollapsed={props.collapsed}>
+                {
+                authInfo.map((pitem,pindex) => {
+                    if(pitem.menus.length){
+                        return (
+                            <SubMenu key={pindex}
+                                title={
+                                    <span>
+                                        <Icon type="appstore" />
+                                        <span>{pitem.name}</span>
+                                    </span>
                                 }
-                            })
-                            }
-                        </SubMenu>
-                    )
-                }else{
-                    return (
-                        <Menu.Item key={pitem.url}>
-                            <Icon type="inbox" />
-                            <span>{pitem.name}</span>
-                        </Menu.Item>
-                    )
+                            >
+                                {
+                                pitem.menus.map((sub_item,sub_index) => {
+                                    
+                                    if(sub_item.children.length){
+                                        
+                                        return (
+                                            <SubMenu key={pindex + "" + sub_index} title={ <span>{sub_item.name} </span> } >
+                                                {
+                                                    sub_item.children.map((ss_item,ss_index) => {
+                                                        return (
+                                                            <Menu.Item key={ss_item.url}>{ss_item.name}</Menu.Item>
+                                                        )
+                                                    })
+                                                }
+                                            </SubMenu>
+                                        )
+                                        
+                                    }else{
+                                        
+                                        return (<Menu.Item key={sub_item.url}>{sub_item.name}</Menu.Item>)
+                                    }
+                                })
+                                }
+                            </SubMenu>
+                        )
+                    }else{
+                        return (
+                            <Menu.Item key={pitem.url}>
+                                <Icon type="inbox" />
+                                <span>{pitem.name}</span>
+                            </Menu.Item>
+                        )
+                    }
+                    
+                })
                 }
-                
-            })
-            }
-        </Menu>
-    )
+            </Menu>
+        )
+    } else {
+        return null;
+    }
 }
 
 
@@ -72,9 +76,11 @@ class SiderBar extends React.Component{
     constructor(props,context){
         super(props,context);
         this.state = {
-            collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false
+            collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
+            openKeys:[],
+            defaultKey: this.props.location.pathname,
+            menuData:this.props.app.appInfo.authInfo || []
         }
-        
     }
     
     UNSAFE_componentWillMount(){
@@ -83,12 +89,25 @@ class SiderBar extends React.Component{
 
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps){
+        if(this.props.app.appInfo.authInfo !== nextProps.app.appInfo.authInfo){
+            this.setState({
+                menuData:nextProps.app.appInfo.authInfo
+            })
+            
+            this.setState({openKeys :this.autoOpenKey(nextProps.app.appInfo.authInfo,this.state.defaultKey)});
+        }
+        if(this.props.location.pathname !== nextProps.location.pathname){
+            this.setState({
+                defaultKey:nextProps.location.pathname
+            })
+        }
+    }
 
-    
-
-    // componentDidUpdate(){
-    //      
-    // }
+ 
+    onOpenChange = (openKeys) => {
+        this.setState({openKeys :openKeys});
+    }
 
     toggleEventListener(){
         let _self = this;
@@ -99,6 +118,24 @@ class SiderBar extends React.Component{
                 _self.openCollapsed();
             }
         },300));
+    }
+
+    autoOpenKey(menuData,currentUrl){
+        let result = [];
+        if(menuData instanceof Array){
+            menuData.forEach((pitem,pindex) => {
+                if(pitem.menus.length){
+                    pitem.menus.forEach((sub_item,sub_index) => {
+                        sub_item.children.forEach((ss_item,ss_index) => {
+                            if(ss_item.url === currentUrl){
+                                result =  ['' + pindex, pindex + '' + sub_index]
+                            }
+                        })
+                    })
+                }
+            })
+        }
+        return result;
     }
 
     openCollapsed() {
@@ -118,6 +155,7 @@ class SiderBar extends React.Component{
         this.setState({
             collapsed: !this.state.collapsed,
         });
+        
     }
     
     linkTo = (item) =>{
@@ -125,24 +163,7 @@ class SiderBar extends React.Component{
     }
 
     render(){
-        let {authInfo} = this.props.app.appInfo;
-        let defaultKey = this.props.location.pathname;
-        let openKeys = [];
-        
-        if(authInfo instanceof Array){
-            authInfo.forEach((pitem,pindex) => {
-                if(pitem.menus.length){
-                    pitem.menus.forEach((sub_item,sub_index) => {
-                        sub_item.children.forEach((ss_item,ss_index) => {
-                            if(ss_item.url === defaultKey){
-                                openKeys = ['' + pindex, pindex + '' + sub_index]
-                            }
-                        })
-                    })
-                }
-            })
-        }
-
+         
         return (
             <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-close"}`} >
                 <Button type="primary" className="collapsed-sidebar" onClick={this.toggleCollapsed}>
@@ -155,7 +176,7 @@ class SiderBar extends React.Component{
                     </a>
                 </div>
                 <div className="menu-box">
-                    <MenuNode list={authInfo} defaultKey={defaultKey} openKeys={openKeys} hanldClick={this.linkTo}></MenuNode>
+                    <MenuNode list={this.state.menuData} onOpenChange={this.onOpenChange} defaultKey={this.state.defaultKey} openKeys={this.state.openKeys} hanldClick={this.linkTo}></MenuNode>
                 </div>
             </div>
         )

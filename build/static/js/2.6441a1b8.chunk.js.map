@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/stock/RuleList.js"],"names":["RuleList","Component"],"mappings":"oNAIqBA,E,iLAEjB,OACE,uF,GAHgCC","file":"static/js/2.6441a1b8.chunk.js","sourcesContent":["\n\nimport React, { Component } from 'react';\n\nexport default class RuleList extends Component {\n  render() {\n    return (\n      <div> 库存配置规则列表 </div>\n    );\n  }\n}\n"],"sourceRoot":""}

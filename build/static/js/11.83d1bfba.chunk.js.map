@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/stock/StockList.js"],"names":["StockList","Component"],"mappings":"sNAIqBA,E,iLAEjB,OACE,2E,GAHiCC","file":"static/js/11.83d1bfba.chunk.js","sourcesContent":["\n\nimport React, { Component } from 'react';\n\nexport default class StockList extends Component {\n  render() {\n    return (\n      <div> 商品库存列表 </div>\n    );\n  }\n}\n"],"sourceRoot":""}
