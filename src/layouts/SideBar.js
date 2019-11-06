@@ -15,7 +15,7 @@ const MenuNode = (props) =>{
     let authInfo = props.list || [];
     if(authInfo.length != 0){
         return (
-            <Menu defaultSelectedKeys={props.defaultKey} onOpenChange={props.onOpenChange} openKeys={props.openKeys} onClick={props.hanldClick}  mode="inline" theme="dark" inlineCollapsed={props.collapsed}>
+            <Menu selectedKeys={props.selectedKeys} onOpenChange={props.onOpenChange} openKeys={props.openKeys} onClick={props.hanldClick}  mode="inline" theme="dark" inlineCollapsed={props.collapsed}>
                 {
                 authInfo.map((pitem,pindex) => {
                     if(pitem.menus.length){
@@ -78,7 +78,7 @@ class SiderBar extends React.Component{
         this.state = {
             collapsed: document.body.clientWidth <= MIN_BODY_WIDTH ? true : false,
             openKeys:[],
-            defaultKey: this.props.location.pathname,
+            selectedKeys: this.props.location.pathname,
             menuData:this.props.app.appInfo.authInfo || []
         }
     }
@@ -95,11 +95,11 @@ class SiderBar extends React.Component{
                 menuData:nextProps.app.appInfo.authInfo
             })
             
-            this.setState({openKeys :this.autoOpenKey(nextProps.app.appInfo.authInfo,this.state.defaultKey)});
+            this.setState({openKeys :this.autoOpenKey(nextProps.app.appInfo.authInfo,this.state.selectedKeys)});
         }
         if(this.props.location.pathname !== nextProps.location.pathname){
             this.setState({
-                defaultKey:nextProps.location.pathname
+                selectedKeys:nextProps.location.pathname
             })
         }
     }
@@ -159,11 +159,11 @@ class SiderBar extends React.Component{
     }
     
     linkTo = (item) =>{
+        console.log(item);
         this.props.history.push(item.key);
     }
 
     render(){
-         
         return (
             <div className={`sider-bar-wrapper ${!this.state.collapsed ? "sider-bar-open":"sider-bar-close"}`} >
                 <Button type="primary" className="collapsed-sidebar" onClick={this.toggleCollapsed}>
@@ -176,7 +176,7 @@ class SiderBar extends React.Component{
                     </a>
                 </div>
                 <div className="menu-box">
-                    <MenuNode list={this.state.menuData} onOpenChange={this.onOpenChange} defaultKey={this.state.defaultKey} openKeys={this.state.openKeys} hanldClick={this.linkTo}></MenuNode>
+                    <MenuNode list={this.state.menuData} onOpenChange={this.onOpenChange} selectedKeys={this.state.selectedKeys} collapsed={this.state.collapsed}  openKeys={this.state.openKeys} hanldClick={this.linkTo}></MenuNode>
                 </div>
             </div>
         )

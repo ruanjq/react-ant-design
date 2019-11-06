@@ -11,11 +11,15 @@ const service = axios.create({
     cancelToken: null // 取消请求
 });
 
+// setInterval(() =>{
+    // console.log("axios",store.getState());
+// },1000);
+
 // request interceptor
 service.interceptors.request.use(config => {
     // Do something before request is sent
-    // console.log("axios",store.getState());
-    let website = "zf";
+    let storeState = store.getState();
+    let website = storeState.app.site;
     if (config.method === 'post') {
         let data = qs.parse(config.data, {
             parameterLimit: Infinity

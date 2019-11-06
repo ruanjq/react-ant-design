@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { hot } from 'react-hot-loader';
-import { BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Redirect,Lifecycle } from "react-router-dom";
 import {Provider} from "react-redux";
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
-
-
 
 import routers from "./routes/index";
 import store from "./redux/store";
@@ -13,6 +11,7 @@ import store from "./redux/store";
 
 class App extends Component {
     
+
     render() {
         // 参考 https://ant.design/components/config-provider-cn/ 配置
         let yourConfig = {
@@ -25,7 +24,7 @@ class App extends Component {
                     <Router> 
                         <Switch>
                             {/* 导入相关路由配置 */}
-                            {routers.map((r, key) => <Route component={r.component} exact={!!r.exact} key={key} path={r.path} />)}
+                            {routers.map((r, key) => <Route name={r.name} breadcrumbName={r.breadcrumbName} component={r.component} exact={!!r.exact} key={key} path={r.path} />)}
                             <Redirect exact from='/' to='/app/index' />
                             <Redirect from='*' to='/404' />
                         </Switch>

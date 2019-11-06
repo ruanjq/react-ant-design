@@ -2,6 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import { is } from 'immutable';
 import { Select, Menu, Dropdown, Icon} from 'antd';
+
+import {getSiteAction,setSiteAction} from "../redux/actions/app_action";
+
 import {logout} from "../service/user";
 const { Option } = Select;
 
@@ -27,47 +30,62 @@ const menu = (
             <span  onClick={e => e.preventDefault()}><Icon type="poweroff" />退出登录</span>
         </Menu.Item>
     </Menu>
-  );
-  
+);
+
+
+
 
 class NavBar extends React.Component{
 
     constructor(props){
         super(props);
+        this.props.dispatch(getSiteAction());
         this.state = {
-            currentSite: 'ZF',
+            currentSite: '',
+            siteinfo:[],
+            userinfo:{}
         }
     }
     
-    shouldComponentUpdate(nextProps, nextState){
+    UNSAFE_shouldComponentUpdate(nextProps, nextState){
         return !(this.props === nextProps || is(this.props, nextProps)) ||
              !(this.state === nextState || is(this.state, nextState));
     }
     
+    UNSAFE_componentWillReceiveProps(nextProps){
+        let currentInfo = nextProps.app.appInfo;
+        if(this.props.app.appInfo !== currentInfo){
+            this.setState({
+                userinfo:currentInfo.userinfo,
+                siteinfo:currentInfo.siteinfo
+            })
+        }
+        if(this.props.app.site !== nextProps.app.site){
+            this.setState({
+                currentSite:nextProps.app.site,
+            })
+        }
+    }
 
     handleChange = e => {
-        this.setState({
-            currentSite: e.key,
-        });
+        if(e !== this.state.currentSite){
+            this.setState({
+                currentSite: e,
+            });
+            this.props.dispatch(setSiteAction(e));
+            // 切换站点重新刷新页面
+            window.location.reload();
+        }
     }
 
     render() {
-        let userName = "";
-        let siteinfo = this.props.app.appInfo.siteinfo || [];
-        let {userinfo} = this.props.app.appInfo;
-        if(userinfo){
-            userName = userinfo.real_name;
-        }
-        if(siteinfo.length > 0){
-            this.state.currentSite = siteinfo[0].site
-        }
         return (
             <div className="nav-bar-wrapper clearfix">
                 <span className="text">站点:</span>
                 <div className="site-menu">
-                    <Select defaultValue={this.state.currentSite} style={{ width: 150 }} onChange={this.handleChange}>
+                    <Select value={this.state.currentSite} style={{ width: 150 }} onChange={this.handleChange}>
                         {
-                            siteinfo.map((item,index) =>{
+                            this.state.siteinfo.map((item,index) =>{
                                 return <Option key={item.site} value={item.site}>{item.name}</Option>
                             })
                         }
@@ -76,7 +94,7 @@ class NavBar extends React.Component{
                 <div className="fr cursor-pointer">
                     <Dropdown overlay={menu} placement="bottomRight">
                         <span className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                        欢迎:{userName}&nbsp;<Icon type="down" />
+                        欢迎:{this.state.userinfo.real_name}&nbsp;<Icon type="down" />
                         </span>
                     </Dropdown>
                 </div>

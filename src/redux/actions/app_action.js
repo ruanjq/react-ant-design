@@ -26,3 +26,29 @@ export const appInfoAction = async (dispatch) =>{
     });
 }
 
+
+const localStorageSite = {
+    set(siteName){
+        localStorage["site"] = siteName;
+    },
+    get(){
+        return localStorage["site"] || "zf";
+    }
+}
+
+export const getSiteAction = () =>{
+    return {
+        type:"STORAGE_SITE_GET",
+        payload:localStorageSite.get()
+    }
+}
+
+export const setSiteAction = (siteName) =>{
+    localStorageSite.set(siteName)
+    return {
+        type:"STORAGE_SITE_SET",
+        payload:localStorageSite.get()
+    }
+    
+    
+}
